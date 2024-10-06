@@ -4,6 +4,8 @@ import com.springProject.journalApp.Entity.JournalEntry;
 import com.springProject.journalApp.Service.JournalEntryService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -22,11 +24,16 @@ public class JournalEntryController {
        return js;
     }
     @PostMapping("/POST")
-    public boolean createEntry(@RequestBody JournalEntry myEntry)
+    public ResponseEntity createEntry(@RequestBody JournalEntry myEntry)
     {
-        myEntry.setDate(LocalDateTime.now());
-        journalEntryService.saveEntry(myEntry);
-        return true;
+        try {
+            myEntry.setDate(LocalDateTime.now());
+            journalEntryService.saveEntry(myEntry);
+            return new ResponseEntity(myEntry,HttpStatus.CREATED);
+        }
+         catch (Exception e) {
+             return new ResponseEntity(myEntry,HttpStatus.BAD_REQUEST);
+        }
     }
     @DeleteMapping("/DELETE/{ID}")
     public boolean deleteById(@PathVariable ObjectId ID)
@@ -35,9 +42,15 @@ public class JournalEntryController {
         return true;
     }
     @GetMapping("/GET/{ID}")
-    public Optional<JournalEntry> findById(@PathVariable ObjectId ID)
+    public ResponseEntity<JournalEntry> findById(@PathVariable ObjectId ID)
     {
-        return journalEntryService.findById(ID);
+        Optional<JournalEntry> myEntry= journalEntryService.findById(ID);
+        if(myEntry.isPresent())
+        {
+            return new ResponseEntity<>(myEntry.get(), HttpStatus.OK);
+        }
+        else{
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
     }
     @PutMapping("/POST/{ID}")
     public JournalEntry updateById(@PathVariable ObjectId ID, @RequestBody JournalEntry updatedEntry)
