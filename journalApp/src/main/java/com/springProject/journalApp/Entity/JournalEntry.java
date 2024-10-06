@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 public class JournalEntry {
     @Id
     public ObjectId id;
-    public String Name;
-    public String Description;
-    public LocalDateTime Date;
+    public String name;
+    public String description;
+    public LocalDateTime date;
 
     public ObjectId getId() {
         return id;
@@ -22,26 +22,26 @@ public class JournalEntry {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
-    public void setDescription(String Description) {
-        this.Description = Description;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public LocalDateTime getDate() {
-        return Date;
+        return date;
     }
 
-    public void setDate(LocalDateTime Date) {
-        this.Date = Date;
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 }
