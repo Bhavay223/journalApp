@@ -25,23 +25,23 @@ public class JournalEntry {
         return Name;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setName(String Name) {
+        this.Name = Name;
     }
 
     public String getDescription() {
         return Description;
     }
 
-    public void setDescription(String description) {
-        Description = description;
+    public void setDescription(String Description) {
+        this.Description = Description;
     }
 
     public LocalDateTime getDate() {
         return Date;
     }
 
-    public void setDate(LocalDateTime date) {
-        Date = date;
+    public void setDate(LocalDateTime Date) {
+        this.Date = Date;
     }
 }

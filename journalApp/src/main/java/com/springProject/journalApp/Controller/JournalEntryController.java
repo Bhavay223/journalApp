@@ -18,7 +18,8 @@ public class JournalEntryController {
     @GetMapping("/GET")
     public List<JournalEntry> getAll()
     {
-       return journalEntryService.getAll();
+        List<JournalEntry> js = journalEntryService.getAll();
+       return js;
     }
     @PostMapping("/POST")
     public boolean createEntry(@RequestBody JournalEntry myEntry)
